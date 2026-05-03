@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { CartProvider } from "@/lib/cart-context";
 import "./globals.css";
 
 const inter = Inter({
@@ -34,11 +36,15 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${robotoMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#090A0C] font-sans text-zinc-100">
-        <Navbar />
-        <div className="flex flex-1 flex-col">{children}</div>
-        <footer className="border-t border-white/[0.06] py-6 text-center text-xs text-zinc-500">
-          © {new Date().getFullYear()} Mozaco LLC · SpareHub
+      <body className="flex min-h-full flex-col bg-[#090A0C] font-sans text-zinc-100 antialiased">
+        <CartProvider>
+          <Navbar />
+          <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+          <WhatsAppFloat />
+        </CartProvider>
+        <footer className="mt-auto border-t border-white/[0.06] py-8 text-center text-xs text-zinc-500">
+          © {new Date().getFullYear()} Mozaco LLC · SpareHub · Premium automotive
+          parts marketplace
         </footer>
       </body>
     </html>
